@@ -1,0 +1,3 @@
+class Config:
+    BOT_TOKEN = '1307356271:AAGDbEEwA8h_jhhQz-UJ5_9RIKTD1Jdm24M'
+

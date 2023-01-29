@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <h2>Message form</h2>
+        <form method="post" action="{{ url_for("views.create_message") }}">
+            <input name="csrf_token" hidden value="{{ csrf_token }}">
+            <p>Message content</p>
+            <textarea name="content" cols="40" rows="10"></textarea>
+            <p>Expiration time</p>
+            <input name="expiration_timestamp" type="datetime-local">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}

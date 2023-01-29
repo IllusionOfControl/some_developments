@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <h2>Message:</h2>
+        {% autoescape false %}
+        <p>{{ message.content | replace('\n', '<br>') }}</p>
+        {% endautoescape %}
+        <span>END MESSAGE</span>
+    </div>
+
+{% endblock %}

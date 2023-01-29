@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <h3>Message created</h3>
+        <p>Creation time: {{ message.create_timestamp }}</p>
+        <a href="{{ url_for("views.display_message", slug=message.slug) }}">link to message</a>
+        <p>or raw link:</p>
+        <p>{{ url_for("views.display_message", slug=message.slug, _external=True) }}</p>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2f363e;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.analog-clock {
+    position: relative;
+    border-radius: 50%;
+    width: 450px;
+    height: 450px;
+    background-color: #2f363e;
+    border-color: aliceblue;
+    box-shadow: 10px 20px 70px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.analog-clock::before{
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #2f363e;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    z-index: 99;
+}
+
+.analog-clock span {
+    position: absolute;
+    inset: 20px;
+    color: #fff;
+    text-align: center;
+    transform: rotate(calc(30deg * var(--i)));
+}
+
+.analog-clock span b {
+    font-size: 2em;
+    opacity: 0.25;
+    font-weight: 600;
+    display: inline-block;
+    transform: rotate(calc(-30deg * var(--i)));
+}
+
+.circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+.circle i {
+    position: absolute;
+    width: 6px;
+    height: 50%;
+    background: var(--clr);
+    transform-origin: bottom;
+    transform: scaleY(0.5);
+}
+
+.circle:nth-child(1) i {
+    width: 2px;
+}
+
+.circle::before {
+    content: '';
+    position: absolute;
+    background-color: var(--clr);
+    width: 15px;
+    height: 15px;
+    top: -8.5px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--clr);
+}
+
+.circle2 {
+    width: 240px;
+    height: 240px;
+    z-index: 9;
+}
+
+.circle3 {
+    width: 180px;
+    height: 180px;
+    z-index: 8;
+}
+
+.digital-clock {
+    margin-top: 40px;
+    display: flex;
+    padding: 15px 40px;
+    font-size: 3rem;
+    font-weight: 600;
+    border: 2x solid rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    box-shadow: 10px 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.digital-clock div {
+    position:relative;
+    width: 60px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--clr);
+    margin-left: 5px;
+}
+
+.digital-clock div:nth-child(1)::after,
+.digital-clock div:nth-child(2)::after {
+    content: ':';
+    position: absolute;
+}
+
+.digital-clock div:last-child {
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.digital-clock div:nth-child(1)::after,
+.digital-clock div:nth-child(2)::after {
+    animation: animate 1s steps(1) infinite;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
