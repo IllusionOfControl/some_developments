@@ -1,0 +1,1 @@
+Some scripts for work with git repos
