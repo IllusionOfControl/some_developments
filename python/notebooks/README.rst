@@ -1,0 +1,1 @@
+The repository contains some pieces of code for studying Flash, Plotly, OpenCV, asyncio

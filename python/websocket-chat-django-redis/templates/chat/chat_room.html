@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ chat_room.id|json_script:"chat_id" }}
+
+<h3>Chat room for {{ chat_room.second_user }}</h3>
+<ul id="chat-log">
+{% for message in chat_room.messages.all %}
+
+<li>{{ message.content }} via {{ message.user }}</li>
+
+{% endfor %}
+</ul>
+
+<form>
+    {% csrf_token %}
+    {{form.as_p }}
+<input type='submit' class='btn btn-primary' id="chat-message-submit"/>
+</form>
+
+    <script>
+        const roomName = JSON.parse(document.getElementById('chat_id').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const li = document.createElement("li");
+            const ul = document.querySelector('#chat-log');
+            li.append(`${data.message} via ${ data.username }`);
+            ul.appendChild(li);
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+            console.error(e);
+        };
+
+        document.querySelector('#chat-message-input').focus();
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            if (message) {
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+                messageInputDom.value = '';
+            }
+        };
+    </script>
+{% endblock %}
